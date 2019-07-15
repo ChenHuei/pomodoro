@@ -1,23 +1,29 @@
 export const MENU_LIST = [
   {
-    name: 'list'
+    name: 'notes',
+    link: '/'
   },
   {
-    name: 'insert_chart'
+    name: 'trending_up',
+    link: '/analysis'
   },
   {
-    name: 'library_music'
+    name: 'notifications_none',
+    link: '/setting'
   }
 ]
 
 export const TODO_LIST = [
   {
-    name: 1
+    message: 'the first thing to do today',
+    isComplete: false
   },
   {
-    name: 2
+    message: 'the second thing to do today',
+    isComplete: true
   },
   {
-    name: 3
+    message: 'the third thing to do today',
+    isComplete: false
   }
 ]

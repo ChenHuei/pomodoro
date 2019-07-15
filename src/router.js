@@ -7,8 +7,24 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: () => import('@/views/Home')
+      component: () => import('@/views/Home'),
+      children: [
+        {
+          path: '',
+          name: 'TodoList',
+          component: () => import('@/containers/TodoList')
+        },
+        {
+          path: 'analysis',
+          name: 'Analysis',
+          component: () => import('@/containers/Analysis')
+        },
+        {
+          path: 'setting',
+          name: 'Setting',
+          component: () => import('@/containers/Setting')
+        }
+      ]
     }
   ]
 })
