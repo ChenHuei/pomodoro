@@ -44,7 +44,7 @@ export default {
   @include flexCenter;
   flex-direction: column;
   justify-content: space-between;
-  padding: 5%;
+  padding: 40px 5%;
   > .menu {
     @include flexCenter;
     flex-direction: column;
