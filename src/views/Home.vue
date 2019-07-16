@@ -11,17 +11,11 @@
 <script>
 import SideBar from '../components/SideBar'
 import Clock from '../components/Clock'
-import { TODO_LIST } from '../constants'
 export default {
   name: 'Home',
   components: {
     SideBar,
     Clock
-  },
-  data () {
-    return {
-      TODO_LIST
-    }
   }
 }
 </script>
