@@ -20,10 +20,24 @@
       </div>
       <div class="containter">
         <div class="table">
-          <div class="row" v-for="i in 6" :key="i">
-            <div class="unit">{{(7 - i) * 2}}</div>
-            <div class="cell" v-for="item in ANALYSIS_TABLE" :key="item.date">
-              <div v-if="i === 6" class="date">{{item.date}}</div>
+          <div
+            class="row"
+            v-for="row in 6"
+            :key="row">
+            <div class="unit">{{unitHandler(row)}}</div>
+            <div
+              class="cell"
+              v-for="item in ANALYSIS_TABLE"
+              :key="item.date">
+              <div
+                v-if="row === 6"
+                class="date">
+                {{item.date}}
+              </div>
+              <div
+                v-if="row === 6"
+                class="dot"
+                :style="dotStyleHandler(item.number)"></div>
             </div>
           </div>
         </div>
@@ -46,6 +60,16 @@ export default {
     showWeekHandler () {
       return '2019.07.03 - 2019.07.09'
     }
+  },
+  methods: {
+    unitHandler (row) {
+      return (7 - row) * 2
+    },
+    dotStyleHandler (number) {
+      return {
+        bottom: `${30 * number}px`
+      }
+    }
   }
 }
 </script>
@@ -57,10 +81,10 @@ export default {
   @include size(100%);
   padding: 72px 10%;
   > .title {
+    color: color(orange);
     font-size: 40px;
     font-weight: 400;
     letter-spacing: 2px;
-    color: color(orange);
     text-transform: uppercase;
   }
 }
@@ -90,8 +114,8 @@ export default {
         text-transform: capitalize;
       }
       > .number {
-        font-size: 60px;
         color: color(orange);
+        font-size: 60px;
       }
     }
     > .right {
@@ -112,9 +136,9 @@ export default {
   > .daterange {
     @include size(100%, auto);
     @include flexCenter;
+    margin-bottom: 60px;
     font-size: 28px;
     color: color(grey);
-    margin-bottom: 60px;
     > i {
       font-size: 40px;
       cursor: pointer;
@@ -142,14 +166,14 @@ export default {
   > .row {
     @include size(100%, auto);
     @include flexCenter;
-    justify-content: space-around;
     position: relative;
+    justify-content: space-around;
     > .unit {
       @include size(24px);
       @include flexCenter;
       position: absolute;
       left: -40px;
-      top: -8px;
+      top: -10px;
       color: color(orange);
       font-size: 20px;
     }
@@ -162,8 +186,16 @@ export default {
         bottom: 0;
         left: 0;
         color: color(orange);
-        letter-spacing: 1px;
         transform: translateX(-50%) translateY(200%);
+        letter-spacing: 1px;
+      }
+      > .dot {
+        @include size(12px);
+        position: absolute;
+        left: 0;
+        background-color: color(white);
+        border-radius: 50%;
+        transform: translateX(-50%) translateY(50%);
       }
     }
   }
