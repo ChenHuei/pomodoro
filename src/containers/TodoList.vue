@@ -39,7 +39,7 @@ export default {
 
 .todolist {
   @include size(100%);
-  padding: 72px 5%;
+  padding: 72px 10%;
   > .title {
     font-size: 40px;
     font-weight: 400;

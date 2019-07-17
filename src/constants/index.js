@@ -30,3 +30,47 @@ export const TODO_LIST = [
     isComplete: false
   }
 ]
+
+export const ANALYSIS_RECORD = [
+  {
+    id: 1,
+    name: 'today',
+    number: 20
+  },
+  {
+    id: 2,
+    name: 'week',
+    number: 160
+  }
+]
+
+export const ANALYSIS_TABLE = [
+  {
+    date: '07/03',
+    number: 4
+  },
+  {
+    date: '07/04',
+    number: 5
+  },
+  {
+    date: '07/05',
+    number: 7
+  },
+  {
+    date: '07/06',
+    number: 6
+  },
+  {
+    date: '07/07',
+    number: 8
+  },
+  {
+    date: '07/08',
+    number: 5
+  },
+  {
+    date: '07/09',
+    number: 7
+  }
+]

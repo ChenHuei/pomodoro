@@ -103,7 +103,7 @@ export default {
     }
   }
   > .button {
-    @include size(45%, 60px);
+    @include size(50%, 72px);
     @include flexCenter;
     margin-bottom: 10%;
     background-color: color(orange);
