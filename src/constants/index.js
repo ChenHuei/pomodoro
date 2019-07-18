@@ -79,41 +79,36 @@ export const RINGTONE_LIST = [
   {
     id: 0,
     name: 'default',
-    isChecked: true
+    src: require('../assets/ringtones/default.mp3')
   },
   {
     id: 1,
-    name: 'advanced',
-    isChecked: false
+    name: 'birds',
+    src: require('../assets/ringtones/birds.mp3')
   },
   {
     id: 2,
     name: 'bell',
-    isChecked: false
+    src: require('../assets/ringtones/bell.mp3')
   },
   {
     id: 3,
     name: 'classic',
-    isChecked: false
+    src: require('../assets/ringtones/classic.mp3')
   },
   {
     id: 4,
-    name: 'crystal',
-    isChecked: false
-  },
-  {
-    id: 5,
-    name: 'game time',
-    isChecked: false
+    name: 'warning',
+    src: require('../assets/ringtones/warning.mp3')
   },
   {
     id: 6,
     name: 'opening',
-    isChecked: false
+    src: require('../assets/ringtones/opening.mp3')
   },
   {
     id: 7,
-    name: 'radar',
-    isChecked: false
+    name: 'alert',
+    src: require('../assets/ringtones/alert.mp3')
   }
 ]

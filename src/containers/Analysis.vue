@@ -92,7 +92,7 @@ export default {
 .list {
   @include size(100%, 144px);
   @include flexCenter;
-  margin-top: 80px;
+  margin-top: 10%;
   > .item {
     @include size(50%, 100%);
     @include flexCenter;

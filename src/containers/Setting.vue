@@ -5,12 +5,11 @@
       <li
         v-for="item in RINGTONE_LIST"
         :key="item.id"
-        :class="itemClassHandler(item)">
+        :class="itemClassHandler(item)"
+        @click="checkRingTone(item)">
         <div class="left">
           <div class="circle">
-            <i
-              v-if="item.isChecked"
-              class="done material-icons">
+            <i class="done material-icons">
               done
             </i>
           </div>
@@ -18,8 +17,9 @@
         </div>
         <i
           class="material-icons right"
-          @click="playSound">
+          @click="playSound(item)">
           play_circle_filled
+          <audio :data-id="item.id" :src="item.src"></audio>
         </i>
       </li>
     </ul>
@@ -28,10 +28,13 @@
 
 <script>
 import { RINGTONE_LIST } from '../constants'
+import { setTimeout } from 'timers';
 export default {
   name: 'Setting',
   data () {
     return {
+      isPlaying: false,
+      id: 0,
       RINGTONE_LIST
     }
   },
@@ -39,11 +42,23 @@ export default {
     itemClassHandler (item) {
       return {
         item: true,
-        check: item.isChecked
+        check: item.id === this.id
       }
     },
-    playSound () {
-      console.log('play')
+    checkRingTone(item) {
+      this.id = item.id
+    },
+    playSound (item) {
+      if (this.isPlaying) return
+      const audio = document.querySelector(`audio[data-id='${item.id}']`)
+      if (!audio) return 
+      this.isPlaying = true
+      audio.currentTime = 0
+      audio.play()
+      setTimeout(() => {
+        audio.pause()
+        this.isPlaying = false
+      }, 1500)
     }
   }
 }
@@ -73,7 +88,7 @@ export default {
   @include size(100%, 80px);
   @include flexCenter;
   justify-content: space-between;
-  padding: 0 36px 0 24px;
+  padding: 0 12px 0 24px;
   margin-top: 36px;
   background: color(grey);
   opacity: .8;
@@ -81,11 +96,6 @@ export default {
   cursor: pointer;
   &:first-child {
     margin-top: 0;
-  }
-  &.check {
-    color: color(white);
-    background-color: color(orange);
-    opacity: 1;
   }
   &:hover {
     transform: translateX(-8px) translateY(-8px);
@@ -100,22 +110,38 @@ export default {
       border: 2px solid color(white);
       border-radius: 50%;
       > .done {
-        margin-left: 1px;
+        display: none;
         font-size: 24px;
         color: color(white);
         background-color: transparent;
       }
     }
     > .name {
+      color: color(grey_dark);
       font-size: 28px;
       font-weight: 700;
-      color: color(grey_dark);
       text-transform: capitalize;
     }
   }
   > .right {
+    padding: 24px;
     font-size: 36px;
     cursor: pointer;
+  }
+}
+
+.item {
+  &.check {
+    color: color(white);
+    background-color: color(orange);
+    opacity: 1;
+    > .left {
+      > .circle {
+        > .done {
+          display: block;
+        }
+      }
+    }
   }
 }
 </style>
