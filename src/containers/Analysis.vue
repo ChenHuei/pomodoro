@@ -132,7 +132,7 @@ export default {
 .graphy {
   @include size(100%, auto);
   position: relative;
-  margin-top: 55%;
+  margin-top: 45%;
   > .daterange {
     @include size(100%, auto);
     @include flexCenter;
