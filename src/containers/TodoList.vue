@@ -2,33 +2,95 @@
   <div class="todolist">
     <div class="title">task list</div>
     <div class="add">
-      <input type="text" class="input" placeholder="Add New Task...">
+      <input
+        type="text"
+        class="input"
+        placeholder="Add New Task..."
+        v-model.trim="message"
+        @keyup.enter="addTodoList"
+        >
     </div>
     <ul class="list">
-      <li v-for="item in TODO_LIST" :key="item.id" class="item">
-        <div :class="circleClassHandler(item)"></div>
+      <li
+        class="item"
+        v-for="(item, index) in todoList"
+        :key="item.id"
+        v-show="showItemHandler(index)">
+        <div
+          :class="circleClassHandler(item)"
+          @click="completeTodo(item)"></div>
         <div class="message">{{item.message}}</div>
       </li>
-      <li class="item more">more...</li>
+      <li
+        class="item more"
+        @click="changeMoreHandler">{{showMoreTitleHandler}}</li>
     </ul>
   </div>
 </template>
 
 <script>
-import { TODO_LIST } from '../constants'
+import { todoList } from '../constants'
 export default {
   name: 'TodoList',
   data () {
     return {
-      TODO_LIST
+      isMore: false,
+      message: '',
+      todoList: [{
+        id: 0,
+        message: 'the first thing to do today',
+        isComplete: false
+      },
+      {
+        id: 1,
+        message: 'the second thing to do today',
+        isComplete: false
+      },
+      {
+        id: 2,
+        message: 'the third thing to do today',
+        isComplete: false
+      }]
+    }
+  },
+  computed: {
+    maxID () {
+      return [...this.todoList].sort((a, b) => b.id - a.id)[0].id + 1
+    },
+    showMoreTitleHandler () {
+      return this.isMore ? 'less...' : 'more...'
     }
   },
   methods: {
+    changeMoreHandler () {
+      this.sortTodoList()
+      this.isMore = !this.isMore
+    },
     circleClassHandler (item) {
       return {
         circle: true,
         complete: item.isComplete
       }
+    },
+    showItemHandler (index) {
+      return index <= 3 ? true : this.isMore
+    },
+    sortTodoList () {
+      this.todoList.sort((a, b) => a.isComplete - b.isComplete)
+    },
+    addTodoList (event) {
+      if (!this.message) return
+      const todo = {
+        id: this.maxID,
+        message: this.message,
+        isComplete: false
+      }
+      this.todoList.unshift(todo)
+      this.sortTodoList()
+      this.message = ''
+    },
+    completeTodo(item) {
+      item.isComplete = !item.isComplete
     }
   }
 }
@@ -40,6 +102,7 @@ export default {
 .todolist {
   @include size(100%);
   padding: 72px 10%;
+  overflow-y: scroll;
   > .title {
     font-size: 40px;
     font-weight: 400;
@@ -76,6 +139,7 @@ export default {
       color: color(white);
       letter-spacing: 1px;
       border-bottom: 1px solid color(white);
+      transition: 1s;
       &.more {
         justify-content: flex-end;
         opacity: .6;
@@ -101,6 +165,26 @@ export default {
         }
       }
     }
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 12px;
+  box-shadow: inset 0 0 5px color(grey); 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: color(orange); 
+  border-radius: 12px;
+  &:hover {
+    opacity: .8;
   }
 }
 
