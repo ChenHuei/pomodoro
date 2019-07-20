@@ -112,11 +112,13 @@ export default {
   @include size(40%, 100%);
   @include flexCenter;
   flex-direction: column;
-  padding: 40px 5%;
+  justify-content: space-between;
+  padding: 72px 5%;
   > .now {
-    @include size(100%, 80px);
+    @include size(100%, 56px);
     @include flexCenter;
     font-size: 40px;
+    line-height: 56px;
     color: color(orange);
     letter-spacing: 1px;
     > .material-icons {
@@ -129,7 +131,7 @@ export default {
   > .circle {
     @include size(30vw);
     @include flexCenter;
-    margin: 20% 0;
+    margin: 10% 0;
     border: 2px solid color(orange);
     border-radius: 50%;
     > .time {
@@ -147,7 +149,6 @@ export default {
   > .button {
     @include size(50%, 72px);
     @include flexCenter;
-    margin-bottom: 10%;
     background-color: color(orange);
     border-radius: 40px;
     font-size: 32px;
