@@ -84,7 +84,7 @@ export default {
         this.pomodroSecond--
       }
     },
-    finish() {
+    finish () {
       alert('恭喜你成功專注了 25 分鐘，休息一下吧！')
       clearInterval(this.pomodroTimer)
     },

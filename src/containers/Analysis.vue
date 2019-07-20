@@ -5,7 +5,9 @@
       <div class="item" v-for="item in ANALYSIS_RECORD" :key="item.id">
         <div class="left">
           <div class="name">{{item.name}}</div>
-          <div class="number">{{item.number}}</div>
+          <div :class="numberClassHandler(item.name)">
+            {{showNumberHandler(item.name)}}
+          </div>
         </div>
         <div class="right">/ tomato</div>
       </div>
@@ -52,6 +54,10 @@ export default {
   name: 'Analysis',
   data () {
     return {
+      todayNumber: 0,
+      todayNumberVisabled: 0,
+      weekNumber: 0,
+      weekNumberVisabled: 0,
       ANALYSIS_RECORD,
       ANALYSIS_TABLE
     }
@@ -59,6 +65,14 @@ export default {
   computed: {
     showWeekHandler () {
       return '2019.07.03 - 2019.07.09'
+    }
+  },
+  watch: {
+    todayNumber () {
+      this.runToday()
+    },
+    weekNumber () {
+      this.runWeek()
     }
   },
   methods: {
@@ -69,7 +83,39 @@ export default {
       return {
         bottom: `${30 * number}px`
       }
+    },
+    showNumberHandler (name) {
+      return this[`${name}NumberVisabled`]
+    },
+    numberClassHandler (name) {
+      const target = `${name}Number`
+      return {
+        number: true,
+        running: this[target] !== this[`${target}Visabled`]
+      }
+    },
+    runToday () {
+      const diff = Math.floor((this.todayNumber - this.todayNumberVisabled) * 0.1)
+      if (diff === 0) {
+        this.todayNumberVisabled = this.todayNumber
+      } else {
+        this.todayNumberVisabled += diff
+        window.requestAnimationFrame(this.runToday)
+      }
+    },
+    runWeek () {
+      const diff = Math.floor((this.weekNumber - this.weekNumberVisabled) * 0.1)
+      if (diff === 0) {
+        this.weekNumberVisabled = this.weekNumber
+      } else {
+        this.weekNumberVisabled += diff
+        window.requestAnimationFrame(this.runWeek)
+      }
     }
+  },
+  mounted () {
+    this.todayNumber = this.ANALYSIS_RECORD[0].number
+    this.weekNumber = this.ANALYSIS_RECORD[1].number
   }
 }
 </script>
@@ -116,6 +162,10 @@ export default {
       > .number {
         color: color(orange);
         font-size: 60px;
+        &.running {
+          transform: scale(1.2);
+          transition: .5s;
+        }
       }
     }
     > .right {
