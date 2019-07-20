@@ -18,7 +18,11 @@
         v-show="showItemHandler(index)">
         <div
           :class="circleClassHandler(item)"
-          @click="completeTodo(item)"></div>
+          @click="completeTodo(item)">
+          <i class="done material-icons">
+            done
+          </i>
+        </div>
         <div class="message">{{item.message}}</div>
       </li>
       <li
@@ -29,7 +33,6 @@
 </template>
 
 <script>
-import { todoList } from '../constants'
 export default {
   name: 'TodoList',
   data () {
@@ -89,7 +92,7 @@ export default {
       this.sortTodoList()
       this.message = ''
     },
-    completeTodo(item) {
+    completeTodo (item) {
       item.isComplete = !item.isComplete
     }
   }
@@ -159,9 +162,16 @@ export default {
         &.complete {
           background-color: color(orange);
           border: 1px solid color(orange);
+          > .done {
+            display: block;
+          }
         }
         &:hover {
           opacity: .8;
+        }
+        > .done {
+          display: none;
+          transition: .5s;
         }
       }
     }
@@ -176,12 +186,12 @@ export default {
 /* Track */
 ::-webkit-scrollbar-track {
   border-radius: 12px;
-  box-shadow: inset 0 0 5px color(grey); 
+  box-shadow: inset 0 0 5px color(grey);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: color(orange); 
+  background: color(orange);
   border-radius: 12px;
   &:hover {
     opacity: .8;

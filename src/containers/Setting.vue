@@ -28,7 +28,6 @@
 
 <script>
 import { RINGTONE_LIST } from '../constants'
-import { setTimeout } from 'timers';
 export default {
   name: 'Setting',
   data () {
@@ -45,13 +44,13 @@ export default {
         check: item.id === this.id
       }
     },
-    checkRingTone(item) {
+    checkRingTone (item) {
       this.id = item.id
     },
     playSound (item) {
       if (this.isPlaying) return
       const audio = document.querySelector(`audio[data-id='${item.id}']`)
-      if (!audio) return 
+      if (!audio) return
       this.isPlaying = true
       audio.currentTime = 0
       audio.play()

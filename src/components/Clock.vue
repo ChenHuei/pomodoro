@@ -29,8 +29,10 @@ export default {
   data () {
     return {
       isStart: false,
-      timeMinute: 25,
-      timeSecond: 0,
+      pomodroTimer: '',
+      pomodroMinute: 25,
+      pomodroSecond: 0,
+      timer: '',
       hour: 0,
       minute: 0
     }
@@ -43,7 +45,7 @@ export default {
       return `${this.zeroDigital(this.hour % 12)}:${this.zeroDigital(this.minute)}`
     },
     time () {
-      return `${this.timeMinute}:${this.zeroDigital(this.timeSecond)}`
+      return `${this.zeroDigital(this.pomodroMinute)}:${this.zeroDigital(this.pomodroSecond)}`
     },
     buttonTitleHandler () {
       return this.isStart ? 'pause' : 'start'
@@ -52,15 +54,42 @@ export default {
   methods: {
     startHandler () {
       this.isStart = !this.isStart
+      if (this.isStart) {
+        this.pomodroTimer = setInterval(this.setPomodroTime, 1000)
+        this.setPomodroTime()
+      } else {
+        clearInterval(this.pomodroTimer)
+        this.resetPomodroTime()
+      }
+    },
+    setTime () {
+      const now = new Date()
+
+      this.hour = now.getHours()
+      this.minute = now.getMinutes()
+    },
+    setPomodroTime () {
+      if (this.pomodroSecond === 0) {
+        this.pomodroMinute--
+        this.pomodroSecond = 59
+      } else {
+        this.pomodroSecond--
+      }
+    },
+    resetPomodroTime () {
+      this.pomodroMinute = 25
+      this.pomodroSecond = 0
     },
     zeroDigital (target, digital = '0', count = 2) {
       return `${digital.repeat(count)}${target}`.slice(-1 * count)
     }
   },
+  beforeDestroy () {
+    clearInterval(this.timer)
+  },
   mounted () {
-    const now = new Date()
-    this.hour = now.getHours()
-    this.minute = now.getMinutes()
+    this.timer = setInterval(this.setTime, 1000)
+    this.setTime()
   }
 }
 </script>
