@@ -41,17 +41,17 @@ export default {
       message: '',
       todoList: [{
         id: 0,
-        message: 'the first thing to do today',
+        message: 'The first thing to do today',
         isComplete: false
       },
       {
         id: 1,
-        message: 'the second thing to do today',
+        message: 'The second thing to do today',
         isComplete: false
       },
       {
         id: 2,
-        message: 'the third thing to do today',
+        message: 'The third thing to do today',
         isComplete: false
       }]
     }

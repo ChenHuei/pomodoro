@@ -15,9 +15,9 @@
     </div>
     <ul class="progress">
       <li
-        class="dot"
-        v-for="num in 4"
-        :key="num">
+        v-for="num in 5"
+        :key="num"
+        :class="dotClassHandler(num)">
       </li>
     </ul>
   </div>
@@ -52,6 +52,13 @@ export default {
     }
   },
   methods: {
+    dotClassHandler (num) {
+      const step = (25 - this.pomodroMinute) / 5
+      return {
+        dot: true,
+        fill: step === 5 && this.pomodroSecond === 0 ? true : step > num
+      }
+    },
     startHandler () {
       this.isStart = !this.isStart
       if (this.isStart) {
@@ -59,22 +66,27 @@ export default {
         this.setPomodroTime()
       } else {
         clearInterval(this.pomodroTimer)
-        this.resetPomodroTime()
       }
     },
     setTime () {
       const now = new Date()
-
       this.hour = now.getHours()
       this.minute = now.getMinutes()
     },
     setPomodroTime () {
       if (this.pomodroSecond === 0) {
+        if (this.pomodroMinute === 0) {
+          this.finish()
+        }
         this.pomodroMinute--
         this.pomodroSecond = 59
       } else {
         this.pomodroSecond--
       }
+    },
+    finish() {
+      alert('恭喜你成功專注了 25 分鐘，休息一下吧！')
+      clearInterval(this.pomodroTimer)
     },
     resetPomodroTime () {
       this.pomodroMinute = 25
@@ -127,6 +139,7 @@ export default {
       font-weight: 700;
       letter-spacing: 3px;
       color: color(white);
+      background-color: color(grey_light);
       border: 2px solid color(orange);
       border-radius: 50%;
     }
@@ -151,12 +164,16 @@ export default {
     @include flexCenter;
     justify-content: space-between;
     margin: 0;
-    padding: 0 20%;
+    padding: 0 10%;
     list-style: none;
     > .dot {
       @include size(40px);
       border: 2px solid color(orange);
       border-radius: 50%;
+      transition: .5s;
+      &.fill {
+        background: color(orange);
+      }
     }
   }
 }
