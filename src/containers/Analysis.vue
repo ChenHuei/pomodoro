@@ -24,7 +24,7 @@
         <div class="table">
           <div
             class="row"
-            v-for="row in 6"
+            v-for="row in rows"
             :key="row">
             <div class="unit">{{unitHandler(row)}}</div>
             <div
@@ -32,17 +32,18 @@
               v-for="item in ANALYSIS_TABLE"
               :key="item.date">
               <div
-                v-if="row === 6"
+                v-if="row === rows"
                 class="date">
                 {{item.date}}
               </div>
               <div
-                v-if="row === 6"
+                v-if="row === rows"
                 class="dot"
                 :style="dotStyleHandler(item.number)"></div>
             </div>
           </div>
         </div>
+        <canvas id="canvas"></canvas>
       </div>
     </div>
   </div>
@@ -54,6 +55,7 @@ export default {
   name: 'Analysis',
   data () {
     return {
+      rows: 6,
       todayNumber: 0,
       todayNumberVisabled: 0,
       weekNumber: 0,
@@ -111,11 +113,32 @@ export default {
         this.weekNumberVisabled += diff
         window.requestAnimationFrame(this.runWeek)
       }
+    },
+    draw () {
+      const tableWidth = document.querySelector('.table').offsetWidth
+      const tableHeight = document.querySelector('.table').offsetHeight
+      const unitWidth = tableWidth / this.ANALYSIS_TABLE.length
+      const canvas = document.querySelector('#canvas')
+      const ctx = canvas.getContext('2d')
+      canvas.width = tableWidth
+      canvas.height = tableHeight
+      ctx.beginPath()
+      ctx.moveTo(0, tableHeight)
+      this.ANALYSIS_TABLE.forEach((item, index) => {
+        ctx.lineTo(index * unitWidth, tableHeight * (1 - (item.number / (this.rows * 2))))
+      })
+      ctx.lineTo(unitWidth * (this.ANALYSIS_TABLE.length - 1), tableHeight)
+      ctx.closePath()
+      ctx.fillStyle = 'rgba(251, 164, 62, 0.5)'
+      ctx.strokeStyle = '#FFF'
+      ctx.fill()
+      ctx.stroke()
     }
   },
   mounted () {
     this.todayNumber = this.ANALYSIS_RECORD[0].number
     this.weekNumber = this.ANALYSIS_RECORD[1].number
+    this.draw()
   }
 }
 </script>
@@ -204,6 +227,11 @@ export default {
     @include size(calc(100% - 18px), 360px);
     position: relative;
     overflow: hidden;
+    > #canvas {
+      position: absolute;
+      left: 36px;
+      bottom: 32px;
+    }
   }
 }
 

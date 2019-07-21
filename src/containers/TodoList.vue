@@ -26,6 +26,7 @@
         <div class="message">{{item.message}}</div>
       </li>
       <li
+        v-if="todoList.length > 3"
         class="item more"
         @click="changeMoreHandler">{{showMoreTitleHandler}}</li>
     </ul>
@@ -76,7 +77,7 @@ export default {
       }
     },
     showItemHandler (index) {
-      return index <= 3 ? true : this.isMore
+      return index < 3 ? true : this.isMore
     },
     sortTodoList () {
       this.todoList.sort((a, b) => a.isComplete - b.isComplete)

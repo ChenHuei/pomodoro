@@ -110,7 +110,7 @@ export default {
       ctx.beginPath()
       ctx.arc(clockCircleWidth / 2, clockCircleWidth / 2, (clockCircleWidth - lineWidth) / 2, 0, this.progressPercent * 2 * Math.PI)
       ctx.lineWidth = lineWidth
-      ctx.strokeStyle = '#FBA43E'
+      ctx.strokeStyle = 'rgba(251, 164, 62, 0.8)'
       ctx.stroke()
     },
     finish () {
@@ -173,6 +173,7 @@ export default {
     margin: 10% 0;
     border: 2px solid color(orange);
     border-radius: 50%;
+    overflow: hidden;
     > #myCanvas {
       position: absolute;
       transform: rotate(-90deg);
@@ -211,7 +212,7 @@ export default {
     @include size(100%, 60px);
     @include flexCenter;
     justify-content: space-between;
-    margin: 0;
+    margin: 10% 0 0;
     padding: 0 10%;
     list-style: none;
     > .dot {
