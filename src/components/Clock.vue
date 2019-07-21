@@ -21,22 +21,25 @@
         :class="dotClassHandler(num)">
       </li>
     </ul>
+    <audio :id="RINGTONE_LIST[0].name" :src="RINGTONE_LIST[0].src"></audio>
   </div>
 </template>
 
 <script>
+import { RINGTONE_LIST } from '../constants'
 export default {
   name: 'Clock',
   data () {
     return {
       isStart: false,
+      isFinish: false,
       pomodroTimer: '',
       pomodroMinute: 25,
       pomodroSecond: 0,
       timer: '',
       hour: 0,
       minute: 0,
-      count: 0
+      RINGTONE_LIST
     }
   },
   computed: {
@@ -50,7 +53,7 @@ export default {
       return `${this.zeroDigital(this.pomodroMinute)}:${this.zeroDigital(this.pomodroSecond)}`
     },
     buttonTitleHandler () {
-      return this.isStart ? 'pause' : 'start'
+      return this.isFinish ? 'restart' : this.isStart ? 'pause' : 'start'
     },
     progressPercent () {
       const total = 25 * 60
@@ -67,6 +70,10 @@ export default {
       }
     },
     startHandler () {
+      if (this.isFinish) {
+        this.resetPomodroTime()
+        return
+      }
       this.isStart = !this.isStart
       if (this.isStart) {
         this.pomodroTimer = setInterval(this.setPomodroTime, 1000)
@@ -85,6 +92,7 @@ export default {
       if (this.pomodroSecond === 0) {
         if (this.pomodroMinute === 0) {
           this.finish()
+          return
         }
         this.pomodroMinute--
         this.pomodroSecond = 59
@@ -104,13 +112,21 @@ export default {
       ctx.lineWidth = lineWidth
       ctx.strokeStyle = '#FBA43E'
       ctx.stroke()
-      this.count += 0.1
     },
     finish () {
-      alert('恭喜你成功專注了 25 分鐘，休息一下吧！')
+      this.isFinish = true
       clearInterval(this.pomodroTimer)
+      const audio = document.querySelector('#default')
+      audio.currentTime = 0
+      audio.play()
+      alert('恭喜你成功專注了 25 分鐘，休息一下吧！')
+      setTimeout(() => {
+        audio.pause()
+      }, 2000)
     },
     resetPomodroTime () {
+      this.isStart = false
+      this.isFinish = false
       this.pomodroMinute = 25
       this.pomodroSecond = 0
     },
