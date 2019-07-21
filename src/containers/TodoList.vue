@@ -103,6 +103,8 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/import";
 
+@include scrollBar;
+
 .todolist {
   @include size(100%);
   padding: 72px 10%;
@@ -178,25 +180,4 @@ export default {
     }
   }
 }
-
-/* width */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  border-radius: 12px;
-  box-shadow: inset 0 0 5px color(grey);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: color(orange);
-  border-radius: 12px;
-  &:hover {
-    opacity: .8;
-  }
-}
-
 </style>

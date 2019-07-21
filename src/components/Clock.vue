@@ -11,17 +11,19 @@
         {{time}}
       </div>
     </div>
-    <div class="button" @click="startHandler">
-      {{buttonTitleHandler}}
+    <div class="bottom">
+      <div class="button" @click="startHandler">
+        {{buttonTitleHandler}}
+      </div>
+      <ul class="progress">
+        <li
+          v-for="num in 5"
+          :key="num"
+          :class="dotClassHandler(num)">
+        </li>
+      </ul>
+      <audio :id="RINGTONE_LIST[0].name" :src="RINGTONE_LIST[0].src"></audio>
     </div>
-    <ul class="progress">
-      <li
-        v-for="num in 5"
-        :key="num"
-        :class="dotClassHandler(num)">
-      </li>
-    </ul>
-    <audio :id="RINGTONE_LIST[0].name" :src="RINGTONE_LIST[0].src"></audio>
   </div>
 </template>
 
@@ -83,6 +85,7 @@ export default {
       }
     },
     setTime () {
+      console.log('set')
       const now = new Date()
       this.hour = now.getHours()
       this.minute = now.getMinutes()
@@ -136,9 +139,11 @@ export default {
   },
   beforeDestroy () {
     clearInterval(this.timer)
+    window.removeEventListener('resize', this.setTime)
   },
   mounted () {
     this.timer = setInterval(this.setTime, 1000)
+    window.addEventListener('resize', this.setTime)
     this.setTime()
   }
 }
@@ -170,7 +175,8 @@ export default {
     @include size(30vw);
     @include flexCenter;
     position: relative;
-    margin: 10% 0;
+    max-width: 520px;
+    max-height: 520px;
     border: 2px solid color(orange);
     border-radius: 50%;
     overflow: hidden;
@@ -194,34 +200,39 @@ export default {
       border-radius: 50%;
     }
   }
-  > .button {
-    @include size(50%, 72px);
+  > .bottom {
+    @include size(100%, auto);
     @include flexCenter;
-    background-color: color(orange);
-    border-radius: 40px;
-    font-size: 32px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: .5s;
-    cursor: pointer;
-    &:hover {
-      opacity: .8;
-    }
-  }
-  > .progress {
-    @include size(100%, 60px);
-    @include flexCenter;
-    justify-content: space-between;
-    margin: 10% 0 0;
-    padding: 0 10%;
-    list-style: none;
-    > .dot {
-      @include size(40px);
-      border: 2px solid color(orange);
-      border-radius: 50%;
+    flex-direction: column;
+    > .button {
+      @include size(50%, 72px);
+      @include flexCenter;
+      background-color: color(orange);
+      border-radius: 40px;
+      font-size: 32px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
       transition: .5s;
-      &.fill {
-        background: color(orange);
+      cursor: pointer;
+      &:hover {
+        opacity: .8;
+      }
+    }
+    > .progress {
+      @include size(100%, 60px);
+      @include flexCenter;
+      justify-content: space-between;
+      margin: 10% 0 0;
+      padding: 0 10%;
+      list-style: none;
+      > .dot {
+        @include size(40px);
+        border: 2px solid color(orange);
+        border-radius: 50%;
+        transition: .5s;
+        &.fill {
+          background: color(orange);
+        }
       }
     }
   }

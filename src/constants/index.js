@@ -84,12 +84,12 @@ export const RINGTONE_LIST = [
     src: require('../assets/ringtones/warning.mp3')
   },
   {
-    id: 6,
+    id: 5,
     name: 'opening',
     src: require('../assets/ringtones/opening.mp3')
   },
   {
-    id: 7,
+    id: 6,
     name: 'alert',
     src: require('../assets/ringtones/alert.mp3')
   }

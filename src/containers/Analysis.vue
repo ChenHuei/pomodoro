@@ -1,15 +1,17 @@
 <template>
   <div class="analysis">
-    <div class="title">Analysis</div>
-    <div class="list">
-      <div class="item" v-for="item in ANALYSIS_RECORD" :key="item.id">
-        <div class="left">
-          <div class="name">{{item.name}}</div>
-          <div :class="numberClassHandler(item.name)">
-            {{showNumberHandler(item.name)}}
+    <div class="top">
+      <div class="title">Analysis</div>
+      <div class="list">
+        <div class="item" v-for="item in ANALYSIS_RECORD" :key="item.id">
+          <div class="left">
+            <div class="name">{{item.name}}</div>
+            <div :class="numberClassHandler(item.name)">
+              {{showNumberHandler(item.name)}}
+            </div>
           </div>
+          <div class="right">/ tomato</div>
         </div>
-        <div class="right">/ tomato</div>
       </div>
     </div>
     <div class="graphy">
@@ -135,10 +137,14 @@ export default {
       ctx.stroke()
     }
   },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.draw)
+  },
   mounted () {
     this.todayNumber = this.ANALYSIS_RECORD[0].number
     this.weekNumber = this.ANALYSIS_RECORD[1].number
     this.draw()
+    window.addEventListener('resize', this.draw)
   }
 }
 </script>
@@ -148,13 +154,20 @@ export default {
 
 .analysis {
   @include size(100%);
+  @include flexCenter;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 72px 10%;
-  > .title {
-    color: color(orange);
-    font-size: 40px;
-    font-weight: 400;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+  > .top {
+    @include size(100%, auto);
+    > .title {
+      color: color(orange);
+      font-size: 40px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
   }
 }
 
@@ -205,7 +218,6 @@ export default {
 .graphy {
   @include size(100%, auto);
   position: relative;
-  margin-top: 40%;
   > .daterange {
     @include size(100%, auto);
     @include flexCenter;

@@ -66,9 +66,11 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/import";
 
+@include scrollBar;
 .setting {
   @include size(100%);
   padding: 72px 10%;
+  overflow-y: scroll;
   > .title {
     font-size: 40px;
     font-weight: 400;
@@ -77,7 +79,7 @@ export default {
     text-transform: uppercase;
   }
   > .list {
-    @include size(100%);
+    @include size(100%, auto);
     margin: 10% 0 0 0;
     padding: 0;
     list-style: none;
