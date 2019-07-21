@@ -5,7 +5,8 @@
       <span class="session">{{session}}</span>
       <span>{{now}}</span>
     </div>
-    <div class="circle">
+    <div class="clockCircle">
+      <canvas id="myCanvas"></canvas>
       <div class="time">
         {{time}}
       </div>
@@ -34,7 +35,8 @@ export default {
       pomodroSecond: 0,
       timer: '',
       hour: 0,
-      minute: 0
+      minute: 0,
+      count: 0
     }
   },
   computed: {
@@ -49,6 +51,11 @@ export default {
     },
     buttonTitleHandler () {
       return this.isStart ? 'pause' : 'start'
+    },
+    progressPercent () {
+      const total = 25 * 60
+      const percent = 1 - Math.floor(this.pomodroMinute * 60 + this.pomodroSecond) / total
+      return Math.min(percent, 1)
     }
   },
   methods: {
@@ -72,6 +79,7 @@ export default {
       const now = new Date()
       this.hour = now.getHours()
       this.minute = now.getMinutes()
+      this.draw()
     },
     setPomodroTime () {
       if (this.pomodroSecond === 0) {
@@ -83,6 +91,20 @@ export default {
       } else {
         this.pomodroSecond--
       }
+    },
+    draw () {
+      const clockCircleWidth = document.querySelector('.clockCircle').offsetWidth
+      const lineWidth = clockCircleWidth * 0.8
+      const canvas = document.querySelector('#myCanvas')
+      const ctx = canvas.getContext('2d')
+      canvas.width = clockCircleWidth
+      canvas.height = clockCircleWidth
+      ctx.beginPath()
+      ctx.arc(clockCircleWidth / 2, clockCircleWidth / 2, (clockCircleWidth - lineWidth) / 2, 0, this.progressPercent * 2 * Math.PI)
+      ctx.lineWidth = lineWidth
+      ctx.strokeStyle = '#FBA43E'
+      ctx.stroke()
+      this.count += 0.1
     },
     finish () {
       alert('恭喜你成功專注了 25 分鐘，休息一下吧！')
@@ -128,15 +150,24 @@ export default {
       margin: 0 16px 0 24px;
     }
   }
-  > .circle {
+  > .clockCircle {
     @include size(30vw);
     @include flexCenter;
+    position: relative;
     margin: 10% 0;
     border: 2px solid color(orange);
     border-radius: 50%;
+    > #myCanvas {
+      position: absolute;
+      transform: rotate(-90deg);
+    }
     > .time {
       @include size(80%);
       @include flexCenter;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       font-size: 88px;
       font-weight: 700;
       letter-spacing: 3px;
