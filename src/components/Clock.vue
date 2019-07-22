@@ -156,27 +156,27 @@ export default {
   @include flexCenter;
   flex-direction: column;
   justify-content: space-between;
-  padding: 72px 5%;
+  padding: 56px 5%;
   > .now {
-    @include size(100%, 56px);
+    @include size(100%, 2.8rem);
     @include flexCenter;
-    font-size: 40px;
-    line-height: 56px;
+    font-size: 2.4rem;
+    line-height: 2.8rem;
     color: color(orange);
     letter-spacing: 1px;
     > .material-icons {
-      font-size: 56px;
+      font-size: 2.8rem;
     }
     > .session {
-      margin: 0 16px 0 24px;
+      margin: 0 1rem 0 1.6rem;
     }
   }
   > .clockCircle {
-    @include size(30vw);
+    @include size(20vw);
     @include flexCenter;
     position: relative;
-    max-width: 520px;
-    max-height: 520px;
+    max-width: 30rem;
+    max-height: 30rem;
     border: 2px solid color(orange);
     border-radius: 50%;
     overflow: hidden;
@@ -191,7 +191,7 @@ export default {
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      font-size: 88px;
+      font-size: 5rem;
       font-weight: 700;
       letter-spacing: 3px;
       color: color(white);
@@ -205,11 +205,11 @@ export default {
     @include flexCenter;
     flex-direction: column;
     > .button {
-      @include size(50%, 72px);
+      @include size(60%, 4rem);
       @include flexCenter;
       background-color: color(orange);
       border-radius: 40px;
-      font-size: 32px;
+      font-size: 2rem;
       text-transform: uppercase;
       letter-spacing: 2px;
       transition: .5s;
@@ -219,14 +219,14 @@ export default {
       }
     }
     > .progress {
-      @include size(100%, 60px);
+      @include size(100%, 4rem);
       @include flexCenter;
+      margin: 5% 0 0 0;
+      padding: 0 5%;
       justify-content: space-between;
-      margin: 10% 0 0;
-      padding: 0 10%;
       list-style: none;
       > .dot {
-        @include size(40px);
+        @include size(2rem);
         border: 2px solid color(orange);
         border-radius: 50%;
         transition: .5s;

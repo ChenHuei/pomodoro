@@ -23,8 +23,9 @@ export default {
 #app {
   @include size(100vw, 100vh);
   display: flex;
-  overflow: hidden;
   background-color: color(grey_light);
+  font-size: 10px;
   font-family: $font-family;
+  overflow: hidden;
 }
 </style>

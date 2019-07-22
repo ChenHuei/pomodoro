@@ -85,7 +85,7 @@ export default {
     },
     dotStyleHandler (number) {
       return {
-        bottom: `${30 * number}px`
+        bottom: `${1.6 * number}rem`
       }
     },
     showNumberHandler (name) {
@@ -158,12 +158,12 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 72px 10%;
+  padding: 56px 10%;
   > .top {
     @include size(100%, auto);
     > .title {
       color: color(orange);
-      font-size: 40px;
+      font-size: 2.8rem;
       font-weight: 400;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -172,9 +172,9 @@ export default {
 }
 
 .list {
-  @include size(100%, 144px);
+  @include size(100%, 8rem);
   @include flexCenter;
-  margin-top: 10%;
+  margin-top: 5%;
   > .item {
     @include size(50%, 100%);
     @include flexCenter;
@@ -191,13 +191,13 @@ export default {
       justify-content: space-between;
       > .name {
         color: color(grey);
-        font-size: 40px;
+        font-size: 2rem;
         letter-spacing: 1px;
         text-transform: capitalize;
       }
       > .number {
         color: color(orange);
-        font-size: 60px;
+        font-size: 3.2rem;
         &.running {
           transform: scale(1.2);
           transition: .5s;
@@ -207,7 +207,7 @@ export default {
     > .right {
       justify-content: flex-end;
       color: color(grey);
-      font-size: 24px;
+      font-size: 1.6rem;
       line-height: 40px;
       letter-spacing: 1px;
       opacity: .6;
@@ -221,11 +221,11 @@ export default {
   > .daterange {
     @include size(100%, auto);
     @include flexCenter;
-    margin-bottom: 60px;
-    font-size: 28px;
+    margin-bottom: 6%;
+    font-size: 2rem;
     color: color(grey);
     > i {
-      font-size: 40px;
+      font-size: 3.2rem;
       cursor: pointer;
       &:hover {
         opacity: .8;
@@ -236,7 +236,7 @@ export default {
     }
   }
   > .containter {
-    @include size(calc(100% - 18px), 360px);
+    @include size(calc(100% - 18px), 19.2rem);
     position: relative;
     overflow: hidden;
     > #canvas {
@@ -265,10 +265,10 @@ export default {
       left: -40px;
       top: -10px;
       color: color(orange);
-      font-size: 20px;
+      font-size: 1rem;
     }
     > .cell {
-      @include size(calc(100% / 7), 60px);
+      @include size(calc(100% / 7), 3.2rem);
       position: relative;
       border: 1px solid color(grey);
       > .date {
@@ -276,6 +276,7 @@ export default {
         bottom: 0;
         left: 0;
         color: color(orange);
+        font-size: 1rem;
         transform: translateX(-50%) translateY(200%);
         letter-spacing: 1px;
       }

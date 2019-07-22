@@ -107,22 +107,22 @@ export default {
 
 .todolist {
   @include size(100%);
-  padding: 72px 10%;
+  padding: 56px 10%;
   overflow-y: scroll;
   > .title {
-    font-size: 40px;
+    font-size: 2.8rem;
     font-weight: 400;
     letter-spacing: 2px;
     color: color(orange);
     text-transform: uppercase;
   }
   > .add {
-    @include size(100%, 72px);
-    margin: 10% 0 5% 0;
+    @include size(100%, 4.8rem);
+    margin: 6% 0 3% 0;
     > .input {
       @include size(80%, 100%);
-      padding: 0 24px;
-      font-size: 24px;
+      padding: 0 2rem;
+      font-size: 1.6rem;
       color: color(white);
       background-color: transparent;
       border: 1px solid color(orange);
@@ -136,11 +136,11 @@ export default {
     padding: 0;
     list-style: none;
     > .item {
-      @include size(100%, 100px);
+      @include size(100%, 6rem);
       @include flexCenter;
       justify-content: flex-start;
-      padding: 24px 24px 12px 12px;
-      font-size: 28px;
+      padding: 24px 8px 8px;
+      font-size: 1.6rem;
       font-weight: 400;
       color: color(white);
       letter-spacing: 1px;
@@ -156,8 +156,8 @@ export default {
         }
       }
       > .circle {
-        @include size(28px);
-        margin-right: 36px;
+        @include size(1.6rem);
+        margin-right: 1.6rem;
         border: 1px solid color(white);
         border-radius: 50%;
         transition: .5s;

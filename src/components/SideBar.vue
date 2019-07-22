@@ -40,11 +40,11 @@ export default {
 <style lang="scss" scoped>
 @import "../styles/import";
 .sidebar {
-  @include size(15%, 100%);
+  @include size(10%, 100%);
   @include flexCenter;
   flex-direction: column;
   justify-content: space-between;
-  padding: 40px 5%;
+  padding: 40px 0;
   > .menu {
     @include flexCenter;
     flex-direction: column;
@@ -52,9 +52,9 @@ export default {
     margin: 0;
     padding: 0;
     > .item {
-      @include size(88px);
+      @include size(5rem);
       @include flexCenter;
-      margin: 32px 0;
+      margin: 1.2rem 0;
       color: color(orange);
       border: 1px solid color(orange);
       border-radius: 50%;
@@ -69,12 +69,12 @@ export default {
         opacity: 0.8;
       }
       > .icon {
-        font-size: 40px;
+        font-size: 2.4rem;
       }
     }
   }
   > .logo {
-    font-size: 56px;
+    font-size: 2.8rem;
     color: color(orange);
     font-weight: 700;
     letter-spacing: 6px;

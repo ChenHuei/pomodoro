@@ -69,10 +69,10 @@ export default {
 @include scrollBar;
 .setting {
   @include size(100%);
-  padding: 72px 10%;
+  padding: 56px 10%;
   overflow-y: scroll;
   > .title {
-    font-size: 40px;
+    font-size: 2.8rem;
     font-weight: 400;
     letter-spacing: 2px;
     color: color(orange);
@@ -86,11 +86,11 @@ export default {
   }
 }
 .item {
-  @include size(100%, 80px);
+  @include size(100%, 4.4rem);
   @include flexCenter;
   justify-content: space-between;
-  padding: 0 12px 0 24px;
-  margin-top: 36px;
+  padding: 0 1.2rem 0 1.6rem;
+  margin-top: 1.6rem;
   background: color(grey);
   opacity: .8;
   transition: .5s;
@@ -105,28 +105,28 @@ export default {
     @include flexCenter;
     justify-content: flex-start;
     > .circle {
-      @include size(28px);
-      margin-right: 28px;
+      @include size(1.6rem);
+      margin-right: 2rem;
       background-color: transparent;
       border: 2px solid color(white);
       border-radius: 50%;
       > .done {
         display: none;
-        font-size: 24px;
+        font-size: 1.4rem;
         color: color(white);
         background-color: transparent;
       }
     }
     > .name {
       color: color(grey_dark);
-      font-size: 28px;
+      font-size: 1.6rem;
       font-weight: 700;
       text-transform: capitalize;
     }
   }
   > .right {
     padding: 24px;
-    font-size: 36px;
+    font-size: 32px;
     cursor: pointer;
   }
 }
