@@ -85,7 +85,7 @@ export default {
     },
     dotStyleHandler (number) {
       return {
-        bottom: `${1.6 * number}rem`
+        bottom: `${1.5 * number}rem`
       }
     },
     showNumberHandler (name) {
@@ -236,7 +236,7 @@ export default {
     }
   }
   > .containter {
-    @include size(calc(100% - 18px), 19.2rem);
+    @include size(calc(100% - 18px), 18rem);
     position: relative;
     overflow: hidden;
     > #canvas {
@@ -268,7 +268,7 @@ export default {
       font-size: 1rem;
     }
     > .cell {
-      @include size(calc(100% / 7), 3.2rem);
+      @include size(calc(100% / 7), 3rem);
       position: relative;
       border: 1px solid color(grey);
       > .date {

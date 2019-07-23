@@ -172,7 +172,7 @@ export default {
     }
   }
   > .clockCircle {
-    @include size(20vw);
+    @include size(24vw);
     @include flexCenter;
     position: relative;
     max-width: 30rem;
@@ -191,7 +191,7 @@ export default {
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      font-size: 5rem;
+      font-size: 4.4rem;
       font-weight: 700;
       letter-spacing: 3px;
       color: color(white);
@@ -226,7 +226,7 @@ export default {
       justify-content: space-between;
       list-style: none;
       > .dot {
-        @include size(2rem);
+        @include size(1.6rem);
         border: 2px solid color(orange);
         border-radius: 50%;
         transition: .5s;

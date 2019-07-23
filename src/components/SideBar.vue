@@ -52,7 +52,7 @@ export default {
     margin: 0;
     padding: 0;
     > .item {
-      @include size(5rem);
+      @include size(4.4rem);
       @include flexCenter;
       margin: 1.2rem 0;
       color: color(orange);
@@ -74,7 +74,7 @@ export default {
     }
   }
   > .logo {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     color: color(orange);
     font-weight: 700;
     letter-spacing: 6px;
